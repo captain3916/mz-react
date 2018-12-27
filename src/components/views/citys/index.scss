@@ -1,0 +1,126 @@
+.mint-indexlist {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  .mint-header{
+    z-index: 100;
+    background-color: #fff;
+    color: #000;
+    font-size: 0.17rem;
+  }
+  .mint-search{
+    height: 0.52rem;
+    .mint-searchbar {
+      background-color: #f4f4f4;
+      a{
+        font-size: 0.14rem;
+        color: #000;
+      }
+    }
+  }
+  .mint-indexlist-content {
+    width: calc(100% - 17px);
+    height: 100vh;
+    font-size: 14px;
+    overflow: auto;
+    .recommend-city {
+      background-color: #fff;
+      padding-left: 0.15rem;
+      padding-top: 0.15rem;
+    }
+  }
+  .mint-indexlist-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0.17rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 100%;
+    ul {
+      display: flex;
+      flex-direction: column;
+      li {
+        font-size: 12px;
+        padding: 0 2px;
+        color: #191a1b;
+        &.active{
+          color: red;
+        }
+      }
+    }
+  }
+}
+
+.city-index {
+  .city-index-title {
+    font-size: 13px;
+    color: #797d82;
+    margin-bottom: 0.1rem;
+  }
+  .city-index-detail {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    li {
+      width: calc((100vw - 33px) / 3);
+      padding-bottom: 0.15rem;
+      text-align: center;
+      div {
+        height: 0.3rem;
+        background-color: #f4f4f4;
+        line-height: 0.3rem;
+        border-radius: 0.03rme;
+        box-sizing: border-box;
+        margin: 0 0.075rem;
+        font-size: 14px;
+        color: #191a1b;
+      }
+    }
+  }
+}
+
+.mint-indexsection {
+  p.mint-indexsection-index {
+    background-color: #f4f4f4;
+    color: #797d82;
+    padding-left: 0.15rem;
+    height: 0.3rem;
+    line-height: 0.13rem;
+  }
+  ul {
+    padding-left: 0.15rem;
+    li {
+      color: #191a1b;
+      position: relative;
+      height: 0.48rem;
+      width: calc((100vw - 0.33rem) / 3);
+      text-align: center;
+      float: left;
+      font-size: 14px;
+      line-height: 0.48rem;
+    }
+    li::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      border-bottom: 1px solid #ededed;
+      color: #ededed;
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      transform: scaleY(0.5);
+    }
+  }
+  ul::before,
+  ul::after {
+    content: "";
+    display: table;
+  }
+  ul::after {
+    clear: both;
+  }
+}
