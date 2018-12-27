@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-class Citys extends Component {
+class Cinemas extends Component {
   render() {
     return (
       <div>
-        城市列表页
+        我是影院页面
       </div>
     )
   }
 }
 
-export default Citys
+export default Cinemas

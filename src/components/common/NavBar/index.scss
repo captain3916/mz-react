@@ -1,0 +1,69 @@
+.nav-bar {
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  height: 49px;
+  z-index: 100;
+  background: #fff;
+  &::before{
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      border-top: 1px solid #ededed;
+      position: absolute;
+      top: -1px;
+      transform: scaleY(0.5);
+  }
+  li {
+    flex: 1;
+    a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &.films i{
+        background-image: url(./NavImages/films.png);
+      }
+      &.cinemas i{
+        background-image: url(./NavImages/cinemas.png);
+      }
+      &.teamBuy i{
+        background-image: url(./NavImages/uugroupon.png);
+      }
+      &.center i{
+        background-image: url(./NavImages/center.png);
+      }
+      &.active{
+        span{
+          color: #ff5f16;
+        }
+        &.films i{
+          background-image: url(./NavImages/films_on.png);
+        }
+        &.cinemas i{
+          background-image: url(./NavImages/cinemas_on.png);
+        }
+        &.teamBuy i{
+          background-image: url(./NavImages/uugroupon_on.png);
+        }
+        &.center i{
+          background-image: url(./NavImages/center_on.png);
+        }
+      }
+      i.img {
+        width: 21px;
+        height: 21px;
+        margin-top: 8px;
+        background-size: 100%;
+      }
+      span {
+        margin-top: 3px;
+        font-size: 12px;
+        line-height: 12px;
+        color: #797d82;
+      }
+    }
+  }
+}
