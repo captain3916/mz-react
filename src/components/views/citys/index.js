@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import URL from '../../common/Api';
+import { SearchBar, WhiteSpace, NavBar, Icon } from 'antd-mobile';
+import store from '@/store';
+import { SETCITY, SETCITYID } from '@/store/actionType';
 
 import './index.scss';
 
@@ -8,6 +11,7 @@ class Citys extends Component {
   constructor() {
     super();
     this.state = {
+      curCity: store.getState().curCity,
       cityList: [], // 所有城市列表
       keyValue: '', // 搜索城市的关键字
       firstLetter: [], // 城市首字母拼音
@@ -15,10 +19,21 @@ class Citys extends Component {
       citySort:[] // 城市按字母排序
     }
 
+    this.unsubscribe = store.subscribe(() => {
+      this.setState({
+        curCity: store.getState().curCity,
+      })
+    })
+
     this.getHotCitys = this.getHotCitys.bind(this);
     this.getFirstLetter = this.getFirstLetter.bind(this);
     this.getCitySort = this.getCitySort.bind(this);
   }
+
+  componentWillUnmount() {
+    this.unsubscribe(); // 页面被销毁时取消监听
+  }
+
   // 获取热门城市
   getHotCitys() {
     const hotCitys = this.state.cityList.filter(item => item.isHot === 1);
@@ -49,6 +64,19 @@ class Citys extends Component {
     this.setState({ citySort: arr });
   }
 
+  // 更改当前城市
+  changeCurCity(item) {
+    console.log('更改当前城市',item);
+    store.dispatch({
+      type: SETCITY,
+      data: item.name
+    });
+    store.dispatch({
+      type: SETCITYID,
+      data: item.cityId
+    });
+  }
+
   componentWillMount() {
     axios.get(URL.citysUrl).then((response) => {
       if (response.data.code === 0) {
@@ -66,7 +94,13 @@ class Citys extends Component {
   render() {
     return (
       <div className="mint-indexlist city-index">
-
+        <NavBar
+          mode="light"
+          icon={<Icon type="left" />}
+          onLeftClick={() => this.props.history.go(-1)}
+        >当前城市-{this.state.curCity}</NavBar>
+        <SearchBar placeholder="请输入拼音或城市名称" />
+        <WhiteSpace />
         <ul className="mint-indexlist-content">
           <div className="recommend-city">
             <div className="gprs-city">
@@ -84,7 +118,7 @@ class Citys extends Component {
                   this.state.hotCitys.map((item,index) => {
                     return (
                       <li key={index}>
-                        <div click="changeCity(item)">{item.name}</div>
+                        <div onClick={this.changeCurCity.bind(this,item)}>{item.name}</div>
                       </li>
                     )
                   })
@@ -102,7 +136,7 @@ class Citys extends Component {
                     {
                       item.list.map((it,i) => {
                         return (
-                          <li key={i}>{it.name}</li>
+                          <li key={i} onClick={this.changeCurCity.bind(this,it)}>{it.name}</li>
                         )
                       })
                     }
@@ -112,7 +146,7 @@ class Citys extends Component {
             })
           }
         </ul>
-        <div class="mint-indexlist-nav">
+        <div className="mint-indexlist-nav">
           <ul>
             {
               this.state.firstLetter.map((item,index) => {

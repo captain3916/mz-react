@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import store from '../../../../../store'
+import store from '@/store'
 
 import './index.scss';
 
@@ -13,7 +13,7 @@ class CurCity extends Component {
     };
 
     // 监听 仓库的变化
-    store.subscribe(() => {
+    this.unsubscribe = store.subscribe(() => {
       if(this.state.curCity !== store.getState().curCity){
         console.log('如果仓库中的当前城市发生了变化');
         this.setState({
@@ -21,8 +21,13 @@ class CurCity extends Component {
         })
       }
     });
-
   }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+
   render() {
     return (
       <Link to='/citys' className="city-fixed">

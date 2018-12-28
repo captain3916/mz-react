@@ -1,5 +1,5 @@
 
-import { SETCITY } from './actionType';
+import { SETCITY, SETCITYID } from './actionType';
 
 // 先定义初始数据
 let defaultState = {
@@ -21,13 +21,15 @@ let defaultState = {
  */
 export default function(prevState=defaultState, action) {
   // 操作之后要返回一个新的state
-  console.log('==============',prevState,'========', action);
   let state = JSON.parse(JSON.stringify(prevState));
-
-  if (action.type === SETCITY) {
+  switch (action.type) {
+    case SETCITY:
     state.curCity = action.data;
+    return state;
+    case SETCITYID:
+      state.curCityId = action.data;
+      return state;
+    default:
+      return state;
   }
-
-  console.log('==============',state,'========', action);
-  return state;
 }

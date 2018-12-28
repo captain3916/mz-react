@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import axios from 'axios';
+import URL from './components/common/Api';
+import store from './store';
+import { SETCITYID } from './store/actionType';
 import './components/common/css/move-base.css';
 import './components/common/css/main.css';
 
 import City from "./components/views/citys";
 import Home from "./components/views/home";
-import store from './store';
 import { SETCITY } from './store/actionType';
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      curCity: store.getState().curCity,
-    }
+    this.getCityId = this.getCityId.bind(this);
   }
   render() {
     return (
@@ -26,6 +27,22 @@ class App extends Component {
     )
   }
 
+  // 获取城市ID
+  getCityId(cityName) {
+    // console.log(this,cityName);
+    axios.get(URL.cityIdUrl,{
+      params: { cityName }
+    }).then((response) => {
+      if (response.data.code === 0) {
+        store.dispatch({
+          type: SETCITYID,
+          data: response.data.city.cityId
+        });
+      }
+    })
+  }
+
+
   componentWillMount() {
     // 调用百度地图接口根据IP获取当前城市
     /* eslint-disable */
@@ -37,6 +54,7 @@ class App extends Component {
         type: SETCITY,
         data: result.name.slice(0, leg - 1)
       })
+      this.getCityId(result.name.slice(0, leg - 1));
     });
   }
 }

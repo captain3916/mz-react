@@ -1,7 +1,17 @@
+.am-search {
+  border-bottom: 1px solid #ddd;
+}
+.sub-title {
+  color: #888;
+  font-size: 14px;
+  padding: 30px 0 18px 0;
+}
+
 .mint-indexlist {
   position: absolute;
   width: 100%;
   overflow: hidden;
+  font-size: 0.16rem;
   .mint-header{
     z-index: 100;
     background-color: #fff;
@@ -86,12 +96,15 @@
   p.mint-indexsection-index {
     background-color: #f4f4f4;
     color: #797d82;
+    padding: 10px;
     padding-left: 0.15rem;
     height: 0.3rem;
     line-height: 0.13rem;
+    margin: 0;
   }
   ul {
     padding-left: 0.15rem;
+    background: #fff;
     li {
       color: #191a1b;
       position: relative;
@@ -123,4 +136,9 @@
   ul::after {
     clear: both;
   }
+}
+
+.mint-indexsection-index{
+  margin: 0;
+  padding: 10px;
 }

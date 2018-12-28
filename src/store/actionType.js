@@ -2,3 +2,4 @@
 // 暴露出去一系列的 常量
 
 export const SETCITY = 'setCity';
+export const SETCITYID = 'setCityId';
